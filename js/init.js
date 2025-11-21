@@ -7,6 +7,32 @@ const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
+
+//funcionalidad del modo oscuro y su botón
+
+document.addEventListener("DOMContentLoaded", () => {
+  const botonModo = document.getElementById("botonModo");
+
+  if(localStorage.getItem("modo") === "dark") {
+    cambiarTema("dark");
+  } else {
+    cambiarTema("light");
+  }
+
+  if (botonModo) {
+    botonModo.addEventListener("click", () => {
+      if (localStorage.getItem("modo") === "dark") {
+        localStorage.setItem("modo", "light");
+        cambiarTema("light")
+      } else {
+        localStorage.setItem("modo", "dark");
+        cambiarTema("dark")
+      }
+    })
+  }
+
+})
+
 /*función para cambiar los colores del style a modo claro/oscuro con las variables,
 recibe el tema al que va a cambiar*/
 
@@ -64,28 +90,3 @@ let getJSONData = function (url) {
       return result;
     });
 }
-
-//funcionalidad del modo oscuro y su botón
-
-document.addEventListener("DOMContentLoaded", () => {
-  const botonModo = document.getElementById("botonModo");
-
-  if(localStorage.getItem("modo") === "dark") {
-    cambiarTema("dark");
-  } else {
-    cambiarTema("light");
-  }
-
-  if (botonModo) {
-    botonModo.addEventListener("click", () => {
-      if (localStorage.getItem("modo") === "dark") {
-        localStorage.setItem("modo", "light");
-        cambiarTema("light")
-      } else {
-        localStorage.setItem("modo", "dark");
-        cambiarTema("dark")
-      }
-    })
-  }
-
-})

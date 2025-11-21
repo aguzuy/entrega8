@@ -27,3 +27,29 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("botonActualizarCambios").addEventListener("click", () => {
     guardarCambios();
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    var foto = document.querySelector(".fotoDePerfil");
+    var boton = document.getElementById("botonActualizarFoto");
+
+    foto.src = localStorage.getItem("fotoPerfil") || "img/FotoPerfil.png";
+
+    boton.addEventListener("click", function() {
+        var input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image/*";
+
+        input.addEventListener("change", function(e) {
+            var archivo = e.target.files[0];
+            if(!archivo) return;
+            var lector = new FileReader();
+            lector.onload = function() {
+                foto.src = lector.result;
+                localStorage.setItem("fotoPerfil", lector.result);
+            };
+            lector.readAsDataURL(archivo);
+        });
+
+        input.click();
+    });
+});

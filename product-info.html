@@ -6,82 +6,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,900" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Jost:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-</head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 
 <body>
   <nav class="navbar"> 
-      <div class="logo-top">
+    <div class="logo-top">
       <a class="navbar-brand" href="index.html">
         <img class="logo-barra" src="img/logov1.png" alt="">
       </a>
-      </div>
-      <div class="barra-busqueda">
-        <form class="d-flex ">
-         <input class="form-control" id="barraInput" type="search" placeholder="Buscar productos, marcas y más..." aria-label="Search">
-        </form>
-      </div>
-        <div id="contenedorBotones">
-          <div class="contenedorBotonRegistro">
-            <button class="botones" id="botonRegistro" href="#">Registrarse</button>
-          </div>
-          <div class="contenedorBotonIngreso">
-            <a class="botones" id="botonLogin" href="login.html">Ingresar
-              <img class="imagenUsuario" src="img/usuarioPerfil.png" alt="Imagen Usuario">
-            </a>
-            <a id="usuarioBtn" class="botones" href="my-profile.html" style="display:none;">
-              <span id="usuarioNombre"></span>
-            </a>
+    </div>
 
+    <div class="barra-busqueda">
+      <form class="d-flex">
+        <input class="form-control" id="barraInput" type="search" placeholder="Buscar productos, marcas y más..." aria-label="Search">
+      </form>
+    </div>
 
-             
-          </div>
-          <div class="contenedorBotonCompra">
-            <button class="boton-compra" href="#">Mis compras
-              <img class="carrito"src="img/carrito.png" alt="Imagen Carrito">
-            </button>
-          </div>
-        </div>
+    <div id="contenedorBotones">
+      <div class="contenedorBotonRegistro">
+        <button class="botones" id="botonRegistro">Registrarse</button>
+      </div>
+
+      <div class="contenedorBotonIngreso">
+        <a class="botones" id="botonLogin" href="login.html">Ingresar
+          <img class="imagenUsuario" src="img/usuarioPerfil.png" alt="Imagen Usuario">
+        </a>
+        <a id="usuarioBtn" class="botones" href="my-profile.html" style="display:none;">
+          <span id="usuarioNombre"></span>
+        </a>
+      </div>
+
+     <div class="contenedorBotonCompra">
+  <button type="button" class="boton-compra" onclick="window.location.href='cart.html'">
+    Mis compras
+    <img class="carrito" src="img/carrito.png" alt="Imagen Carrito">
+    <span class="contador-carrito" id="contador-carrito">0</span>
+  </button>
+</div>
+
+    </div>
   </nav>
-  <body>
-    <main>
+  <main>
+    <label for="toggle" id="labelToggleinfo">
+      <svg id="botonModo" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+        class="bi bi-brightness-high-fill naranja-product-info" viewBox="0 0 16 16">
+        <path
+          d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
+      </svg>
+    </label>
 
-      <label for="toggle" id="labelToggleinfo">
-        <svg id="botonModo" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-brightness-high-fill naranja-product-info" viewBox="0 0 16 16">
-          <path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
-        </svg>
-      </label>
-      
+    <div id="contenedor-prin"></div>
+    <h3 class="prod-rel">Productos Relacionados</h3>
+    <div id="contenedor-prin-recs"></div>
+    <div id="contenedor-prin-comentarios"></div>
+    <div id="contenedor-prin-agregar-comentarios"></div>
+    <div id="icono-jap">
+      <img class="icono-jap-product-info" src="img/JaP-logo.png" alt="Imagen JAP">
+    </div>
+  </main>
 
-      <div id="contenedor-prin">
-        <!-- aca va el producto -->
-      </div>
-      <h3 class="prod-rel">Productos Relacionados </h3>
-      <div id="contenedor-prin-recs">
-        <!-- aca van los recomendados -->
-      </div>
-      <div id="contenedor-prin-comentarios">
-        <!-- aca van los comentarios-->
-      </div>
-      <div id="contenedor-prin-agregar-comentarios">
-        <!-- aca se agregan comentarios-->
-      </div>
-      <div id="icono-jap">
-        <img class="icono-jap-product-info"src="img/JaP-logo.png" alt="Imagen JAP">
-      </div>
-    </main>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
   <script src="js/login.js"></script>
 </body>
-
 </html>

@@ -14,11 +14,53 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         return response.json();
     })
+  
+.then(data => {
+  mostrarProducto(data);
+  mostrarRecomendados(data);
+});
 
-    .then (data=>{
-        mostrarProducto(data);
-        mostrarRecomendados(data);
-    })
+window.addEventListener("DOMContentLoaded", () => {
+  actualizarContador();
+});
+
+window.addEventListener("pageshow", () => {
+  actualizarContador();
+});
+
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("btn-agregar")) {
+    const nombre = document.getElementById("nombreProducto").textContent;
+    const costo = parseFloat(document.getElementById("precio").textContent);
+    const moneda = document.getElementById("precio").textContent.split(" ")[1];
+    const imagen = document.querySelector(".carousel-slide.active img").src;
+
+    const producto = {
+      nombre,
+      imagen,
+      costo,
+      moneda,
+      cantidad: 1,
+      subtotal: costo
+    };
+
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    carrito.push(producto);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    actualizarContador();
+    alert("Producto agregado al carrito correctamente");
+  }
+});
+
+function actualizarContador() {
+  const contador = document.getElementById("contador-carrito");
+  if (!contador) return;
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  contador.textContent = carrito.length;
+}
+
+
 
     function mostrarProducto(data){
         const caja= document.createElement("div");
@@ -41,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="contenedorDerechaAbajo">
                     <h1 id="precio">${data.cost} ${data.currency}</h1>
                     <p id="cantVendidos">Vendidos: ${data.soldCount}</p>
-                    <button class="btn-agregar">Agregar</button>
+                    <button class="btn btn-agregar">Comprar</button>
                 </div>
             </div>
             <div class="contenedorInferior">
@@ -78,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="card-body">
                     <div class="titulo-recomendados">
                         <h5 class="card-title">${item.name}</h5>
-                        <a href="#" class="btn btn-primary btn-sm btnAgregarRec" data-id="${item.id}">Agregar</a>
+                        <a href="#" class="btn btn-primary btn-sm btnAgregarRec" data-id="${item.id}">Más info</a>
                     </div>
                 </div>
             </div>

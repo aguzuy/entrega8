@@ -5,62 +5,105 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,900" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <div class="barra-carrito">
+    <h1 class="titulo-cart">Carrito de compras</h1>
+  </div>
+
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
-    </div>
+    <div class="container"></div>
   </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+
+  <section id="seccion-costos" class="container mt-5 p-4 rounded">
+    <h4 class="mb-3 resumen-titulo">Resumen de compra</h4>
+    <div class="mb-2 info-compra">
+      <strong>Subtotal:</strong> <span id="subtotalGeneral">0.00</span> USD
     </div>
-  </footer>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+    <div class="mb-2 info-compra">
+      <strong>Costo de envío:</strong> <span id="costoEnvio">0.00</span> USD
+    </div>
+    <div class="mb-3 info-compra">
+      <strong>Total:</strong> <span id="totalFinal">0.00</span> USD
+    </div>
+
+    <div class="botones-cart">
+      <div class="fila-botones">
+        <button id="buy1" class="btn-comprar" data-bs-toggle="modal" data-bs-target="#modalEnvio">Tipo de envío</button>
+        <button id="buy2"class="btn-comprar" data-bs-toggle="modal" data-bs-target="#modalDireccion">Dirección de envío</button>
+        <button id="buy3"class="btn-comprar" data-bs-toggle="modal" data-bs-target="#modalPago">Forma de pago</button>
+      </div>
+      <button id="fin"class="btn-finalizar">Finalizar compra</button>
+    </div>
+  </section>
+
+  <div class="modal fade" id="modalEnvio" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Seleccionar tipo de envío</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <select id="tipoEnvio" class="form-control">
+            <option value="0.15">Premium 2 a 5 días (15%)</option>
+            <option value="0.07">Express 5 a 8 días (7%)</option>
+            <option value="0.05" selected>Standard 12 a 15 días (5%)</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button id="guardarEnvio" class="btn-guardar" data-bs-dismiss="modal">Guardar</button>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class="modal fade" id="modalDireccion" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Dirección de envío</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="departamento" class="form-control mb-2" placeholder="Departamento">
+          <input type="text" id="localidad" class="form-control mb-2" placeholder="Localidad">
+          <input type="text" id="calle" class="form-control mb-2" placeholder="Calle">
+          <input type="text" id="numero" class="form-control mb-2" placeholder="Número">
+          <input type="text" id="esquina" class="form-control mb-2" placeholder="Esquina">
+        </div>
+        <div class="modal-footer">
+          <button class="btn-guardar" data-bs-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalPago" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Seleccionar forma de pago</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <label><input type="radio" name="pago" value="tarjeta" checked> Tarjeta de crédito</label><br>
+          <label><input type="radio" name="pago" value="transferencia"> Transferencia bancaria</label>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-guardar" data-bs-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
 </body>
-
 </html>
