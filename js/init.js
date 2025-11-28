@@ -1,19 +1,18 @@
-const CATEGORIES_URL = "http://localhost:3000/cats/cat.json";
-const PUBLISH_PRODUCT_URL = "http://localhost:3000/sell/publish.json";
-const PRODUCTS_URL = "http://localhost:3000/cats_products/";
-const PRODUCT_INFO_URL = "http://localhost:3000/products/";
-const PRODUCT_INFO_COMMENTS_URL = "http://localhost:3000/products_comments/";
-const CART_INFO_URL = "http://localhost:3000/user_cart/";
-const CART_BUY_URL = "http://localhost:3000/cart/buy.json";
+const API_BASE_URL = "http://localhost:3000";
+
+const CATEGORIES_URL = API_BASE_URL + "/cats/cat.json";
+const PUBLISH_PRODUCT_URL = API_BASE_URL + "/sell/publish.json";
+const PRODUCTS_URL = API_BASE_URL + "/cats_products/";
+const PRODUCT_INFO_URL = API_BASE_URL + "/products/";
+const PRODUCT_INFO_COMMENTS_URL = API_BASE_URL + "/products_comments/";
+const CART_INFO_URL = API_BASE_URL + "/user_cart/";
+const CART_BUY_URL = API_BASE_URL + "/cart/buy.json";
 const EXT_TYPE = ".json";
-
-
-//funcionalidad del modo oscuro y su botón
 
 document.addEventListener("DOMContentLoaded", () => {
   const botonModo = document.getElementById("botonModo");
 
-  if(localStorage.getItem("modo") === "dark") {
+  if (localStorage.getItem("modo") === "dark") {
     cambiarTema("dark");
   } else {
     cambiarTema("light");
@@ -23,18 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
     botonModo.addEventListener("click", () => {
       if (localStorage.getItem("modo") === "dark") {
         localStorage.setItem("modo", "light");
-        cambiarTema("light")
+        cambiarTema("light");
       } else {
         localStorage.setItem("modo", "dark");
-        cambiarTema("dark")
+        cambiarTema("dark");
       }
-    })
+    });
   }
-
-})
-
-/*función para cambiar los colores del style a modo claro/oscuro con las variables,
-recibe el tema al que va a cambiar*/
+});
 
 function cambiarTema(tema) {
   if (tema === "light") {
@@ -59,34 +54,54 @@ function cambiarTema(tema) {
 }
 
 let showSpinner = function () {
-  document.getElementById("spinner-wrapper").style.display = "block";
-}
+  const sp = document.getElementById("spinner-wrapper");
+  if (sp) sp.style.display = "block";
+};
 
 let hideSpinner = function () {
-  document.getElementById("spinner-wrapper").style.display = "none";
-}
+  const sp = document.getElementById("spinner-wrapper");
+  if (sp) sp.style.display = "none";
+};
 
 let getJSONData = function (url) {
   let result = {};
+  const token = localStorage.getItem("token");
+
+  const options = {};
+  if (token) {
+    options.headers = {
+      "Authorization": "Bearer " + token
+    };
+  }
+
   showSpinner();
-  return fetch(url)
+  return fetch(url, options)
     .then(response => {
+      // Si el backend dice 401, limpiamos token y mandamos a login
+      if (response.status === 401) {
+        console.error("No autorizado, redirigiendo a login...");
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+        throw new Error("Unauthorized");
+      }
+
       if (response.ok) {
         return response.json();
       } else {
-        throw Error(response.statusText);
+        throw Error(response.statusText || response.status);
       }
     })
     .then(function (response) {
-      result.status = 'ok';
+      result.status = "ok";
       result.data = response;
       hideSpinner();
       return result;
     })
     .catch(function (error) {
-      result.status = 'error';
+      result.status = "error";
       result.data = error;
+      console.error("Error en getJSONData:", error);
       hideSpinner();
       return result;
     });
-}
+};

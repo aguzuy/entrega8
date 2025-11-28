@@ -1,27 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        window.location.href = "login.html";
+        return;
+    }
+
     const cat = localStorage.getItem("catID");
     const contenedor= document.getElementById("contenedor-main-tarjetas");
     let datos = [];
 
-    
 
-    fetch ("https://japceibal.github.io/emercado-api/cats_products/" + cat + ".json")
-    
-    .then (response => {
-        if(!response.ok){
-            throw new Error("network response was not ok" + response.statusText)
+    getJSONData(PRODUCTS_URL + cat + EXT_TYPE).then(resultObj => {
+        if (resultObj.status === "ok") {
+            datos = resultObj.data.products;
+            mostrarTarjetas(datos);
+        } else {
+            console.error("Error cargando productos:", resultObj.data);
+
+            if (resultObj.data && resultObj.data.message === "Unauthorized") {
+                localStorage.removeItem("token");
+                window.location.href = "login.html";
+            }
         }
-        return response.json();
-    })
-
-    .then (data=>{
-        datos= data.products; //guardo datos del fetch original
-        mostrarTarjetas(datos); //creo las tarjetas por primera vez
-    })
-
-    .catch(error => {
-        console.error('There has been a problem with your fetch operation:', error);
-    })
+    });
 
     function mostrarTarjetas(productos){
         contenedor.innerHTML = "";
